@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <title>Testovací úloha - Jan Váša</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta description="Strávený čas: cca 4h. 30 minut základní rozvržení HTML. 30 minut hrubý layout CSS. 1,5 hodiny stylování, 1,5 hodiny úkoly navíc">
+    <link rel="stylesheet" href="./dist/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;900&display=swap" rel="stylesheet">  
+</head>
+
+<body>
+    <div class="sidemenu">
+        <nav>
+            <span class="close-icon">X</span>
+            <img src="./src/logo.svg" alt="Blog logo" class="logo">
+            <ul>
+                <li>Lorem</li>
+                <li>Ipsum</li>
+                <li>Dolor sit</li>
+                <li>Amet</li>
+            </ul>
+        </nav>
+    </div>
+    <header>
+        <button class="menu">
+            <svg viewBox="0 0 100 80" width="40" height="40">
+                <rect width="100" height="15"></rect>
+                <rect y="30" width="100" height="15"></rect>
+                <rect y="60" width="100" height="15"></rect>
+            </svg>
+        </button>
+        <img src="./src/logo.svg" alt="Blog logo" class="logo">
+        <button class="search">
+            <img src="./src/mag-glass.svg" alt="Seach button icon">
+        </button>
+    </header>
+    <div class="soc-icons">
+        <ul>
+            <li><div class="fb-icon" alt="Facebook icon"></div></li>
+            <li><div class="tw-icon" alt="Twitter icon"></div></li>
+            <li><div class="ig-icon" alt="Instagram icon"></div></li>
+            <li><div class="sh-icon" alt="Share icon"></div></li>
+        </ul>
+    </div>
+    <main>
+        <article class="s2-2 article article-1">
+            <div class="category cat-travel">Travel</div>
+            <div class="heading-area">
+                <h1>Etiam quis quam. Nemo enim ipsam voluptatem quia</h1>
+                <div class="subtext-meta">May 25, 2048 / 9 min.</div>
+            </div>
+        </article>
+        <div class="s1-2 article article-2">
+            <div class="discover">
+                <img src="./src/space-station-moon-alt-duotone.svg">
+                <h1>Discover content from different universe</h1>
+            </div>
+        </div>
+        <article class="s1-1 article article-3">
+            <div class="category cat-travel">Travel</div>
+            <div class="heading-area">
+                <h1>Etiam quis quam. Nemo enim ipsam voluptatem quia</h1>
+                <div class="subtext-meta">January 10, 2048 / 4 min.</div>
+            </div>
+        </article>
+        <article class="s2-2 article article-4">
+            <div class="category cat-travel">Travel</div>
+            <div class="heading-area">
+                <h1>Etiam quis quam. Nemo enim ipsam voluptatem quia</h1>
+                <div class="subtext-meta">August 20, 2047 / 8 min.</div>
+            </div>
+        </article>
+        <article class="s1-1 article article-5">
+            <div class="category cat-tech">Tech</div>
+            <div class="heading-area">
+                <h1>Etiam quis quam. Nemo enim ipsam voluptatem quia</h1>
+                <div class="subtext-meta">October 20, 2047 / 5 min.</div>
+            </div>
+        </article>
+    </main>
+    <footer>
+        <span class="copyright">All rights reserved. ©2048</span>
+        <img src="./src/logo.svg" alt="Blog logo" class="logo">
+    </footer>
+
+    <script>
+        function consoleDemo() {
+            const articles = document.querySelectorAll("article.article");
+            let heights = [];
+            let headings = "";
+            articles.forEach(function(e, i) {
+                heights.push(e.clientHeight);
+                const heading = e.querySelector("h1").innerHTML;
+                headings = headings + heading;
+                e.addEventListener("click", function() {
+                    const meta = e.querySelector(".subtext-meta").innerHTML;
+                    const split = meta.split("/");
+                    console.log("Datum zveřejnění: " + split[0]);
+                    console.log("Délka: " + split[1]);
+                });
+            });
+            const averageHeight = heights.reduce((a, b) => a + b, 0) / heights.length;
+            console.log("Počet příspěvků: " + articles.length);
+            console.log("Průměrná výška příspěvků: " + averageHeight);
+            console.log("Součet délek nadpisů: " + headings.length);
+        }
+        document.addEventListener("scroll", function() {
+            const socials = document.querySelector(".soc-icons");
+            console.log("Ikony oproti viewportu: " + socials.getBoundingClientRect().top);
+            console.log("Ikony oproti dokumentu: " + (socials.getBoundingClientRect().top + window.scrollY));
+        });
+        consoleDemo();
+
+        function openMenu() {
+            document.querySelector("div.sidemenu").classList.add("active");
+        }
+        function closeMenu() {
+            document.querySelector("div.sidemenu").classList.remove("active");
+        }
+
+        document.querySelector("button.menu").addEventListener("click", openMenu);
+        document.querySelector(".close-icon").addEventListener("click", closeMenu);
+        document.addEventListener("click", function(e) {
+            if(e.target === document.querySelector("div.sidemenu")) {
+                closeMenu();
+            }
+        });
+        document.addEventListener("keydown", function(e) {
+            if(e.keyCode === 27) {
+                closeMenu();
+            }
+        });
+    </script>
+</body>
+</html>
